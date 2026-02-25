@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero-section text-center position-relative">
+    <div class="bg-animated"></div>
+    <div class="container pt-5">
+        <h1 class="display-3 fw-bold mb-4" data-aos="fade-down">The <span class="text-danger">Cost</span> of Deception
+        </h1>
+        <p class="lead text-white-50 mx-auto" style="max-width: 800px;" data-aos="fade-up">
+            Online Recruitment Fraud isn't just an inconvenience. It's a multi-billion dollar criminal industry
+            that destroys livelihoods and damages corporate reputations.
+        </p>
+    </div>
+</section>
+
+<!-- Impact Stats -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="glass-card text-center h-100">
+                    <h2 class="display-4 fw-bold text-danger">$2Bn+</h2>
+                    <p class="text-white-50">Annual losses reported by job seekers globally due to fake employment
+                        scams.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-card text-center h-100">
+                    <h2 class="display-4 fw-bold text-white">14M</h2>
+                    <p class="text-white-50">Fake job postings estimated to be circulating on major platforms annually.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-card text-center h-100">
+                    <h2 class="display-4 fw-bold text-warning">70%</h2>
+                    <p class="text-white-50">Of victims report severe emotional distress and loss of trust in digital
+                        platforms.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Anatomy of a Scam -->
+<section class="section-padding bg-dark position-relative">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                <span class="text-danger fw-bold text-uppercase tracking-wider small">Know the Signs</span>
+                <h2 class="fw-bold mt-2 mb-4">Anatomy of a Recruiting Scam</h2>
+                <p class="text-white-50 mb-4">
+                    Fraudsters are becoming sophisticated. They clone legitimate company websites, use AI to write
+                    descriptions,
+                    and conduct video interviews. However, they always leave traces.
+                </p>
+
+                <div class="accordion" id="scamAnatomy">
+                    <div class="accordion-item bg-transparent border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button glass-card py-3 text-white" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                <i class="fas fa-money-bill-wave text-warning me-3"></i> The "Equipment Check"
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#scamAnatomy">
+                            <div class="accordion-body text-white-50 small ps-5">
+                                Asking candidates to purchase a laptop or software from a "vendor" (the scammer) with a
+                                promise of reimbursement.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-transparent border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed glass-card py-3 text-white" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                <i class="fas fa-user-secret text-danger me-3"></i> Identity Theft
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#scamAnatomy">
+                            <div class="accordion-body text-white-50 small ps-5">
+                                Requesting sensitive Tax IDs, Passport scans, or Bank details "for payroll" before an
+                                offer letter is signed.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
+                <div class="glass-card p-4 border-danger position-relative">
+                    <div class="badge bg-danger position-absolute top-0 end-0 m-3">SCAM EMAIL EXAMPLE</div>
+                    <div class="font-monospace small text-white-50 mt-3">
+                        <p><strong>Subject:</strong> URGENT: Job Offer - Data Entry Manager ($55/hr)</p>
+                        <p>Dear Candidate,</p>
+                        <p>We are impressed by your profile. We want to hire you <strong>immediately</strong> without an
+                            interview.</p>
+                        <p class="bg-danger bg-opacity-25 text-white p-1 rounded">Please send your driver's license and
+                            bank login details for direct deposit setup.</p>
+                        <p>Kindly download <strong>Signal/Telegram</strong> to chat with the hiring manager Dr. Smith.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 text-center">
+    <div class="container">
+        <h3 class="fw-bold mb-4">Don't Be a Statistic. Verify First.</h3>
+        <a href="{{ url_for('main.predict_page') }}" class="btn btn-primary-glow btn-lg">Run a Safety Check Now</a>
+    </div>
+</section>
+{% endblock %}

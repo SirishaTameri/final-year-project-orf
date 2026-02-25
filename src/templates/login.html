@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container h-100 d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 200px);">
+    <div class="glass-card fade-in-up" style="max-width: 450px; width: 100%;">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold fs-3">Welcome Back</h2>
+            <p class="text-white-50">Sign in to access your fraud detection dashboard.</p>
+        </div>
+
+        <form id="loginForm">
+            <div id="loginStep">
+                <div class="mb-3">
+                    <label class="form-label text-white-50 small">Email Address</label>
+                    <input type="email" class="form-control input-glass" placeholder="admin@jobguard.ai"
+                        value="admin@jobguard.ai" required>
+                </div>
+                <div class="mb-1">
+                    <label class="form-label text-white-50 small">Password</label>
+                    <input type="password" class="form-control input-glass" value="password123" required>
+                </div>
+                <div class="text-end mb-4">
+                    <a href="#" id="forgotBtn" class="small text-primary text-decoration-none fw-bold">Forgot
+                        Password?</a>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary-glow justify-content-center">
+                        Sign In <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Forgot Password Step (Hidden) -->
+            <div id="forgotStep" class="d-none">
+                <div class="text-center mb-4">
+                    <i class="fas fa-key fa-3x text-warning mb-3"></i>
+                    <p class="small text-white-50">Enter your email to receive a password reset link.</p>
+                </div>
+                <div class="mb-4">
+                    <input type="email" id="resetEmail" class="form-control input-glass" placeholder="Enter your email">
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="button" id="sendResetBtn" class="btn btn-primary-glow justify-content-center">
+                        Send Reset Link <i class="fas fa-paper-plane ms-2"></i>
+                    </button>
+                    <button type="button" class="btn btn-link text-white-50 small" onclick="location.reload()">Back to
+                        Login</button>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <p class="small text-white-50 mb-0">Don't have an account? <a href="{{ url_for('main.signup_page') }}"
+                        class="text-primary fw-bold">Sign Up</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const loginForm = document.getElementById('loginForm');
+    const loginStep = document.getElementById('loginStep');
+    const forgotStep = document.getElementById('forgotStep');
+    const forgotBtn = document.getElementById('forgotBtn');
+
+    forgotBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        loginStep.classList.add('d-none');
+        forgotStep.classList.remove('d-none');
+    });
+
+    document.getElementById('sendResetBtn').addEventListener('click', function () {
+        const email = document.getElementById('resetEmail').value;
+        if (!email) {
+            alert('Please enter your email address.');
+            return;
+        }
+
+        const btn = this;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Sending...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            alert('Simulation: A reset link has been sent to ' + email + '\nCheck your (mock) inbox to set a new password.');
+            location.reload();
+        }, 1500);
+    });
+
+    loginForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        const password = this.querySelector('input[type="password"]').value;
+        const btn = this.querySelector('button[type="submit"]');
+
+        // Simulate loading
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Authenticating...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            // Check existing accounts
+            const accounts = JSON.parse(localStorage.getItem('jobguard_accounts') || '[]');
+            const user = accounts.find(acc => acc.email === email && acc.password === password);
+
+            if (email === 'admin@jobguard.ai' && password === 'password123') {
+                localStorage.setItem('jobguard_user', JSON.stringify({
+                    name: 'Admin User',
+                    email: 'admin@jobguard.ai',
+                    joinDate: 'Jan 2024',
+                    scans: []
+                }));
+                window.location.href = "{{ url_for('main.profile_page') }}";
+            } else if (user) {
+                localStorage.setItem('jobguard_user', JSON.stringify(user));
+                window.location.href = "{{ url_for('main.profile_page') }}";
+            } else {
+                alert('Invalid email or password. Please try again.');
+                btn.innerHTML = 'Sign In <i class="fas fa-arrow-right ms-2"></i>';
+                btn.disabled = false;
+            }
+        }, 1500);
+    });
+</script>
+{% endblock %}

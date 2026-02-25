@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Methodology Header -->
+<section class="hero-section text-center pt-5 pb-5">
+    <div class="bg-animated"></div>
+    <div class="container pt-5">
+        <span class="text-secondary fw-bold text-uppercase tracking-wider small mb-3 d-block"
+            data-aos="fade-up">Technical Deep Dive</span>
+        <h1 class="display-3 fw-bold mb-4" data-aos="fade-up" data-aos-delay="100">Methodology & <span
+                class="text-gradient">Results</span></h1>
+        <p class="lead text-white-50 mx-auto" style="max-width: 700px;" data-aos="fade-up" data-aos-delay="200">
+            Our approach utilizes advanced Transformer-based architectures (BERT & RoBERTa) to detect semantic anomalies
+            in job postings with unprecedented accuracy.
+        </p>
+    </div>
+</section>
+
+<!-- System Architecture -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="glass-card border-0 bg-transparent ps-0">
+                    <h2 class="fw-bold mb-4 display-6">Deep Learning Architecture</h2>
+                    <p class="text-white-50 mb-4">
+                        Traditional spam detection relies on simple keyword matching. Our system leverages
+                        <strong>Bidirectional Encoder
+                            Representations from Transformers (BERT)</strong> to understand the full semantic context of
+                        every job listing.
+                    </p>
+
+                    <div class="d-flex mb-4">
+                        <div class="feature-icon-box me-4 flex-shrink-0">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-2">Contextual Embedding</h5>
+                            <p class="text-white-50 small mb-0">
+                                Unlike TF-IDF, BERT converts job descriptions into 768-dimensional dense vectors
+                                that capture the <em>meaning</em> behind words, not just their frequency.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="feature-icon-box me-4 flex-shrink-0 text-secondary"
+                            style="color: var(--secondary); border-color: rgba(131, 56, 236, 0.3);">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-2">Transfer Learning</h5>
+                            <p class="text-white-50 small mb-0">
+                                We fine-tuned pre-trained models on the specialized EMSCAD (Employment Scam Aegean
+                                Dataset)
+                                to detect domain-specific fraud patterns.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="glass-card text-center p-5 position-relative overflow-hidden">
+                    <div
+                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; background: var(--primary); filter: blur(80px); opacity: 0.2;">
+                    </div>
+                    <i class="fas fa-project-diagram fa-5x text-gradient mb-4"></i>
+                    <h4 class="mb-3">Transformer Pipeline</h4>
+                    <p class="small text-white-50">
+                        Input Text ➔ Tokenization ➔ BERT Encoder ➔ Pooling Layer ➔ Classification Head ➔ Fraud
+                        Probability
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SMOTE Section (Data Balancing) -->
+        <div class="row align-items-center mb-5 flex-row-reverse" id="smote">
+            <div class="col-lg-6" data-aos="fade-left">
+                <h2 class="fw-bold mb-4 display-6">Handling Imbalance (SMOBD)</h2>
+                <div class="alert custom-alert border-danger bg-danger bg-opacity-10 mb-4 rounded-3">
+                    <div class="d-flex">
+                        <i class="fas fa-exclamation-triangle mt-1 me-3 text-danger"></i>
+                        <div>
+                            <strong class="text-danger">The Challenge:</strong>
+                            <span class="text-white-50 d-block mt-1">Real-world data is 95% legitimate. Standard models
+                                become biased and ignore rare fraud cases.</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-white-50">
+                    To prevent this bias, we implemented the <strong>Borderline-SMOTE</strong> algorithm tailored for
+                    NLP tasks.
+                </p>
+                <div class="mt-4">
+                    <div class="glass-card p-3 mb-3 d-flex align-items-center">
+                        <i class="fas fa-plus-circle text-success me-3 fa-2x"></i>
+                        <div>
+                            <h6 class="mb-1 text-white">Synthetic Generation</h6>
+                            <p class="mb-0 text-white-50 small">Creates new synthetic examples of fraud rather than
+                                duplicating old ones.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-3 d-flex align-items-center">
+                        <i class="fas fa-crosshairs text-warning me-3 fa-2x"></i>
+                        <div>
+                            <h6 class="mb-1 text-white">Boundary Focus</h6>
+                            <p class="mb-0 text-white-50 small">Focuses generation on "hard" examples near the decision
+                                boundary.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="glass-card">
+                    <h5 class="mb-4 text-center">Class Distribution</h5>
+
+                    <p class="small text-white-50 mb-1">Before Balancing (Original)</p>
+                    <div class="progress mb-4" style="height: 25px; background: rgba(255,255,255,0.1);">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 95%">Legit (95%)</div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 5%">Fraud</div>
+                    </div>
+
+                    <div class="text-center my-3"><i class="fas fa-arrow-down text-muted"></i></div>
+
+                    <p class="small text-white-50 mb-1">After SMOTE Balancing</p>
+                    <div class="progress" style="height: 25px; background: rgba(255,255,255,0.1);">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 50%">Legit (50%)</div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 50%">Fraud (50%)</div>
+                    </div>
+                    <p class="text-center small text-success mt-3"><i class="fas fa-check-circle me-1"></i> Optimally
+                        Balanced for Training</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Results Section -->
+<section class="section-padding position-relative" style="background: rgba(0,0,0,0.2);">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="text-success fw-bold text-uppercase tracking-wider small">Evidence of Success</span>
+            <h2 class="display-5 fw-bold mt-2">Evaluation Metrics</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6" data-aos="fade-up">
+                <div class="glass-card h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="mb-0">Confusion Matrix</h4>
+                        <span class="badge bg-primary">BERT Model</span>
+                    </div>
+                    <div class="text-center">
+                        <img src="{{ url_for('static', filename='img/confusion_matrix_bert.png') }}"
+                            class="img-fluid rounded border border-secondary shadow-lg"
+                            alt="Confusion Matrix, showing high true positives">
+                    </div>
+                    <p class="text-white-50 small mt-4 text-center">
+                        The diagonal values indicate correct predictions. High numbers in the bottom-right quadrant
+                        confirm the model's ability to catch fraud.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-card h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="mb-0">Linguistic Analysis</h4>
+                        <span class="badge bg-success">Insights</span>
+                    </div>
+                    <div class="text-center">
+                        <img src="{{ url_for('static', filename='img/feature_correlation.png') }}"
+                            class="img-fluid rounded border border-secondary shadow-lg" alt="Feature Correlation">
+                    </div>
+                    <p class="text-white-50 small mt-4 text-center">
+                        Our model identifies that fraudulent postings often abuse specific keywords (e.g., "urgent",
+                        "wire transfer") and lack specific company details.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

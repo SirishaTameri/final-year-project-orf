@@ -1,0 +1,53 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Full Project",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/run_project.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Quick Evaluate Models",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/quick_eval.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Run Preprocessing",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/preprocess.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Run EDA",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/eda.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Train BERT",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/bert_model.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Train RoBERTa",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/roberta_model.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}

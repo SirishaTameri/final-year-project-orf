@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container h-100 d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 200px);">
+    <div class="glass-card fade-in-up" style="max-width: 450px; width: 100%;">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold fs-3" id="signupTitle">Join JobGuard AI</h2>
+            <p class="text-white-50" id="signupSubtitle">Create an account to start protecting your hiring pipeline.</p>
+        </div>
+
+        <form id="signupForm">
+            <div id="step1">
+                <div class="mb-3">
+                    <label class="form-label text-white-50 small">Full Name</label>
+                    <input type="text" class="form-control input-glass" placeholder="John Doe" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white-50 small">Email Address</label>
+                    <input type="email" class="form-control input-glass" placeholder="john@example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white-50 small">Password</label>
+                    <input type="password" class="form-control input-glass" placeholder="Min. 8 characters" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label text-white-50 small">Confirm Password</label>
+                    <input type="password" class="form-control input-glass" placeholder="Confirm your password"
+                        required>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary-glow justify-content-center">
+                        Next: Verify Email <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="step2" class="d-none">
+                <div class="text-center mb-4">
+                    <i class="fas fa-envelope-open-text fa-3x text-primary mb-3"></i>
+                    <p class="small text-white-50">We've sent a 6-digit verification code to your email. Please enter it
+                        below.</p>
+                </div>
+                <div class="mb-4">
+                    <input type="text" id="verifyCode" class="form-control input-glass text-center fs-4 fw-bold"
+                        placeholder="0 0 0 0 0 0" maxlength="6">
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="button" id="completeBtn" class="btn btn-primary-glow justify-content-center">
+                        Verify & Create Account <i class="fas fa-check-circle ms-2"></i>
+                    </button>
+                    <button type="button" class="btn btn-link text-white-50 small" onclick="location.reload()">Back to
+                        Signup</button>
+                </div>
+            </div>
+
+            <div class="text-center mt-4" id="switchLink">
+                <p class="small text-white-50 mb-0">Already have an account? <a href="{{ url_for('main.login_page') }}"
+                        class="text-primary fw-bold">Sign In</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const signupForm = document.getElementById('signupForm');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const signupTitle = document.getElementById('signupTitle');
+    const signupSubtitle = document.getElementById('signupSubtitle');
+    const switchLink = document.getElementById('switchLink');
+
+    let tempUser = null;
+
+    signupForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const inputs = this.querySelectorAll('#step1 input');
+        const name = inputs[0].value;
+        const email = inputs[1].value;
+        const password = inputs[2].value;
+        const confirm = inputs[3].value;
+
+        if (password !== confirm) {
+            alert('Passwords do not match!');
+            return;
+        }
+
+        // Check for existing account
+        const accounts = JSON.parse(localStorage.getItem('jobguard_accounts') || '[]');
+        if (accounts.some(acc => acc.email === email) || email === 'admin@jobguard.ai') {
+            alert('This account already exists! Please sign in instead.');
+            window.location.href = "{{ url_for('main.login_page') }}";
+            return;
+        }
+
+        const btn = this.querySelector('#step1 button');
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Checking...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            tempUser = { name, email, password };
+
+            // Advance to step 2
+            step1.classList.add('d-none');
+            step2.classList.remove('d-none');
+            switchLink.classList.add('d-none');
+            signupTitle.innerText = "Verify Your Email";
+            signupSubtitle.innerText = "Almost there! Protect your account.";
+
+            alert('Verification Code: 123456\n(Simulation: Check your browser alert for the code)');
+        }, 1200);
+    });
+
+    document.getElementById('completeBtn').addEventListener('click', function () {
+        const code = document.getElementById('verifyCode').value;
+        if (code !== '123456') {
+            alert('Invalid verification code! Please try again.');
+            return;
+        }
+
+        const btn = this;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Finalizing...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            // Save to accounts list
+            const accounts = JSON.parse(localStorage.getItem('jobguard_accounts') || '[]');
+            const newUser = {
+                ...tempUser,
+                joinDate: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+                scans: []
+            };
+            accounts.push(newUser);
+            localStorage.setItem('jobguard_accounts', JSON.stringify(accounts));
+
+            // Log in the user
+            localStorage.setItem('jobguard_user', JSON.stringify(newUser));
+
+            alert('Email verified! Account created successfully.');
+            window.location.href = "{{ url_for('main.profile_page') }}";
+        }, 1500);
+    });
+</script>
+{% endblock %}

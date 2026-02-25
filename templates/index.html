@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobGuard AI - Advanced Fraud Detection System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --accent-color: #45b7d1;
+            --success-color: #96ceb4;
+            --warning-color: #ffeaa7;
+            --danger-color: #fd79a8;
+            --dark-bg: #2d3436;
+            --light-bg: #f8f9fa;
+            --text-dark: #2d3436;
+            --text-light: #f8f9fa;
+            --gradient-1: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            --gradient-2: linear-gradient(135deg, #45b7d1, #96ceb4);
+            --gradient-3: linear-gradient(135deg, #fd79a8, #ffeaa7);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: var(--dark-bg);
+            --text-color: var(--text-light);
+            --card-bg: #34495e;
+            --border-color: #5d6d7e;
+        }
+
+        [data-theme="light"] {
+            --bg-color: var(--light-bg);
+            --text-color: var(--text-dark);
+            --card-bg: white;
+            --border-color: #e9ecef;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(69, 183, 209, 0.1) 0%, transparent 50%);
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid transparent;
+            border-image: var(--gradient-1);
+            border-image-slice: 1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .form-control {
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+            transform: scale(1.02);
+        }
+
+        .progress-bar {
+            background: var(--gradient-2);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .tab-content {
+            padding: 2rem 0;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-3);
+            border-radius: 20px;
+            color: var(--text-dark);
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 35px rgba(253, 121, 168, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #ff6b6b;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .stats-card {
+            background: var(--gradient-1);
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-spinner {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            flex-direction: column;
+        }
+
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            border-width: 0.3em;
+            border-color: #ff6b6b;
+            border-right-color: transparent;
+        }
+
+        .result-card {
+            animation: slideIn 0.8s ease;
+            background: var(--gradient-2);
+            color: white;
+            border-radius: 20px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        .confidence-bar {
+            height: 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .confidence-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 2s ease;
+            background: var(--gradient-1);
+            position: relative;
+        }
+
+        .confidence-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .history-item {
+            border-left: 4px solid #ff6b6b;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .history-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.2);
+        }
+
+        .history-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        .alert {
+            border-radius: 12px;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alert-info {
+            background: var(--gradient-2);
+            color: white;
+        }
+
+        .alert-warning {
+            background: var(--gradient-3);
+            color: var(--text-dark);
+        }
+
+        .badge {
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            animation: pop 0.3s ease;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .footer {
+            background: var(--gradient-1);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .footer * {
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .stats-card {
+                padding: 1.5rem;
+            }
+
+            .card:hover {
+                transform: none;
+            }
+        }
+    </style>
+<body data-theme="light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-shield-alt text-primary me-2"></i>
+                JobGuard AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#predict">Predict</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#compare">Compare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#batch">Batch Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#history">History</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-secondary ms-3" id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Dashboard -->
+        <div id="dashboard" class="tab-content">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card p-4 mb-4">
+                        <h2 class="mb-4"><i class="fas fa-chart-line text-primary me-2"></i>Dashboard</h2>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="stats-card">
+                                    <h3 id="totalScans">0</h3>
+                                    <p class="mb-0">Total Scans</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stats-card">
+                                    <h3 id="fraudDetected">0</h3>
+                                    <p class="mb-0">Fraud Detected</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stats-card">
+                                    <h3 id="accuracy">95.2%</h3>
+                                    <p class="mb-0">Accuracy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card p-4">
+                        <h5>Quick Actions</h5>
+                        <div class="d-grid gap-2 mt-3">
+                            <button class="btn btn-primary" onclick="switchTab('predict')">
+                                <i class="fas fa-search me-2"></i>Quick Scan
+                            </button>
+                            <button class="btn btn-outline-primary" onclick="switchTab('batch')">
+                                <i class="fas fa-file-upload me-2"></i>Batch Upload
+                            </button>
+                            <button class="btn btn-outline-secondary" onclick="switchTab('compare')">
+                                <i class="fas fa-balance-scale me-2"></i>Compare Models
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="feature-card card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h5>AI-Powered Detection</h5>
+                        <p>Advanced BERT & RoBERTa models for accurate fraud detection</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h5>Real-time Analysis</h5>
+                        <p>Instant results with confidence scores and detailed explanations</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h5>User-Friendly</h5>
+                        <p>Intuitive interface designed for job seekers and recruiters</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Prediction -->
+        <div id="predict" class="tab-content" style="display: none;">
+            <div class="card p-4">
+                <h3 class="mb-4"><i class="fas fa-search text-primary me-2"></i>Single Prediction</h3>
+                <form id="predictionForm">
+                    <div class="mb-3">
+                        <label for="jobText" class="form-label">Job Posting Text</label>
+                        <textarea class="form-control" id="jobText" name="jobText" rows="6" placeholder="Paste the job posting text here..." required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Select Model</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="model" id="bertModel" value="bert" checked>
+                            <label class="form-check-label" for="bertModel">
+                                BERT Model <small class="text-muted">(More accurate for legitimate jobs)</small>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="model" id="robertaModel" value="roberta">
+                            <label class="form-check-label" for="robertaModel">
+                                RoBERTa Model <small class="text-muted">(Better at detecting fraud)</small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary" id="predictBtn">
+                            <i class="fas fa-magic me-2"></i>Predict
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="clearForm()">
+                            <i class="fas fa-trash me-2"></i>Clear
+                        </button>
+                    </div>
+                </form>
+
+                <div class="loading-spinner mt-4" id="loadingSpinner">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Analyzing job posting...</p>
+                </div>
+
+                <div id="result" class="mt-4" style="display: none;">
+                    <div class="result-card card p-4">
+                        <h5 class="mb-3">Analysis Result</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <strong>Prediction:</strong>
+                                    <span id="prediction" class="badge bg-success ms-2">LEGITIMATE</span>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Confidence:</strong>
+                                    <span id="confidence">85.3%</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <strong>Model Used:</strong>
+                                    <span id="modelUsed">BERT</span>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Analysis Time:</strong>
+                                    <span id="analysisTime">2.3s</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Confidence Visualization:</strong>
+                            <div class="confidence-bar mt-2">
+                                <div class="confidence-fill" id="confidenceBar" style="width: 85%; background: linear-gradient(90deg, #10b981, #6366f1);"></div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info">
+                            <strong>Recommendation:</strong>
+                            <span id="recommendation">This job posting appears legitimate. However, always verify with additional sources.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compare Models -->
+        <div id="compare" class="tab-content" style="display: none;">
+            <div class="card p-4">
+                <h3 class="mb-4"><i class="fas fa-balance-scale text-primary me-2"></i>Compare Models</h3>
+                <form id="compareForm">
+                    <div class="mb-3">
+                        <label for="compareText" class="form-label">Job Posting Text</label>
+                        <textarea class="form-control" id="compareText" rows="6" placeholder="Paste the job posting text here..." required></textarea>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary" id="compareBtn">
+                            <i class="fas fa-chart-bar me-2"></i>Compare
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="clearCompareForm()">
+                            <i class="fas fa-trash me-2"></i>Clear
+                        </button>
+                    </div>
+                </form>
+
+                <div class="loading-spinner mt-4" id="compareLoadingSpinner">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Comparing models...</p>
+                </div>
+
+                <div id="compareResult" class="mt-4" style="display: none;">
+                    <div class="result-card card p-4">
+                        <h5 class="mb-3">Model Comparison Results</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card border-primary mb-3">
+                                    <div class="card-header bg-primary text-white">
+                                        <i class="fas fa-robot me-2"></i>BERT Model
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="card-title" id="bertPrediction">LEGITIMATE</h6>
+                                        <p class="card-text">Confidence: <span id="bertConfidence">85.3%</span></p>
+                                        <div class="progress">
+                                            <div class="progress-bar" id="bertProgress" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card border-success mb-3">
+                                    <div class="card-header bg-success text-white">
+                                        <i class="fas fa-brain me-2"></i>RoBERTa Model
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="card-title" id="robertaPrediction">FRAUDULENT</h6>
+                                        <p class="card-text">Confidence: <span id="robertaConfidence">72.1%</span></p>
+                                        <div class="progress">
+                                            <div class="progress-bar" id="robertaProgress" style="width: 72%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-warning">
+                            <strong>Analysis:</strong>
+                            <span id="comparisonAnalysis">Models show different predictions. BERT is more optimistic while RoBERTa is more conservative in fraud detection.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Batch Analysis -->
+        <div id="batch" class="tab-content" style="display: none;">
+            <div class="card p-4">
+                <h3 class="mb-4"><i class="fas fa-file-upload text-primary me-2"></i>Batch Analysis</h3>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Upload a CSV file with job postings for batch analysis. The file should have a column named 'description' or 'text' containing the job posting content.
+                </div>
+                <form id="batchForm">
+                    <div class="mb-3">
+                        <label for="batchFile" class="form-label">Select CSV File</label>
+                        <input class="form-control" type="file" id="batchFile" accept=".csv" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Select Model</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="batchModel" id="batchBert" value="bert" checked>
+                            <label class="form-check-label" for="batchBert">BERT Model</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="batchModel" id="batchRoberta" value="roberta">
+                            <label class="form-check-label" for="batchRoberta">RoBERTa Model</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="batchBtn">
+                        <i class="fas fa-upload me-2"></i>Analyze Batch
+                    </button>
+                </form>
+
+                <div class="loading-spinner mt-4" id="batchLoadingSpinner">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Processing batch file...</p>
+                    <div class="progress mt-2">
+                        <div class="progress-bar" id="batchProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div id="batchResult" class="mt-4" style="display: none;">
+                    <div class="result-card card p-4">
+                        <h5 class="mb-3">Batch Analysis Results</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 id="totalJobs">0</h4>
+                                    <small>Total Jobs</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 id="legitimateJobs">0</h4>
+                                    <small>Legitimate</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 id="fraudulentJobs">0</h4>
+                                    <small>Fraudulent</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 id="processingTime">0s</h4>
+                                    <small>Processing Time</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-primary" onclick="downloadResults()">
+                                <i class="fas fa-download me-2"></i>Download Results
+                            </button>
+                            <button class="btn btn-outline-secondary" onclick="showDetailedResults()">
+                                <i class="fas fa-list me-2"></i>View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History -->
+        <div id="history" class="tab-content" style="display: none;">
+            <div class="card p-4">
+                <h3 class="mb-4"><i class="fas fa-history text-primary me-2"></i>Analysis History</h3>
+                <div id="historyList">
+                    <div class="text-center text-muted">
+                        <i class="fas fa-inbox fa-3x mb-3"></i>
+                        <p>No analysis history yet. Start by analyzing some job postings!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light mt-5 py-4">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2024 JobGuard AI. Advanced Fraud Detection for Job Seekers.</p>
+            <small class="text-muted">Powered by BERT & RoBERTa Transformers</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+        themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+        // Tab switching
+        function switchTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.style.display = 'none');
+            document.getElementById(tabId).style.display = 'block';
+
+            // Update navbar active state
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            document.querySelector(`[href="#${tabId}"]`).classList.add('active');
+        }
+
+        // Navigation click handlers
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = e.target.getAttribute('href').substring(1);
+                switchTab(target);
+            });
+        });
+
+        // Single prediction
+        const predictionForm = document.getElementById('predictionForm');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const result = document.getElementById('result');
+
+        predictionForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(predictionForm);
+            const text = formData.get('jobText');
+            const model = formData.get('model');
+
+            loadingSpinner.style.display = 'flex';
+            result.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text, model }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch prediction');
+                }
+
+                const data = await response.json();
+
+                document.getElementById('prediction').textContent = data.prediction;
+                document.getElementById('prediction').className = `badge ms-2 bg-${data.prediction === 'LEGITIMATE' ? 'success' : 'danger'}`;
+                document.getElementById('confidence').textContent = `${(data.confidence * 100).toFixed(1)}%`;
+                document.getElementById('modelUsed').textContent = model.toUpperCase();
+                document.getElementById('analysisTime').textContent = `${data.processing_time.toFixed(1)}s`;
+                document.getElementById('confidenceBar').style.width = `${data.confidence * 100}%`;
+                document.getElementById('recommendation').textContent = data.recommendation;
+
+                result.style.display = 'block';
+
+                // Update dashboard stats
+                updateDashboardStats();
+
+                // Add to history
+                addToHistory(text, data);
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error: Failed to get prediction. Please try again.');
+            } finally {
+                loadingSpinner.style.display = 'none';
+            }
+        });
+
+        // Compare models
+        const compareForm = document.getElementById('compareForm');
+        const compareLoadingSpinner = document.getElementById('compareLoadingSpinner');
+        const compareResult = document.getElementById('compareResult');
+
+        compareForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const text = document.getElementById('compareText').value;
+
+            compareLoadingSpinner.style.display = 'flex';
+            compareResult.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/compare', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch comparison');
+                }
+
+                const data = await response.json();
+
+                document.getElementById('bertPrediction').textContent = data.bert.prediction;
+                document.getElementById('bertConfidence').textContent = `${(data.bert.confidence * 100).toFixed(1)}%`;
+                document.getElementById('bertProgress').style.width = `${data.bert.confidence * 100}%`;
+
+                document.getElementById('robertaPrediction').textContent = data.roberta.prediction;
+                document.getElementById('robertaConfidence').textContent = `${(data.roberta.confidence * 100).toFixed(1)}%`;
+                document.getElementById('robertaProgress').style.width = `${data.roberta.confidence * 100}%`;
+
+                document.getElementById('comparisonAnalysis').textContent = data.analysis;
+
+                compareResult.style.display = 'block';
+
+                // Update dashboard stats
+                updateDashboardStats();
+
+                // Add to history
+                addToHistory(text, { bert: data.bert, roberta: data.roberta, comparison: true });
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error: Failed to compare models. Please try again.');
+            } finally {
+                compareLoadingSpinner.style.display = 'none';
+            }
+        });
+
+        // Batch analysis
+        const batchForm = document.getElementById('batchForm');
+        const batchLoadingSpinner = document.getElementById('batchLoadingSpinner');
+        const batchResult = document.getElementById('batchResult');
+        let batchResults = [];
+
+        batchForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const file = document.getElementById('batchFile').files[0];
+            const model = document.querySelector('input[name="batchModel"]:checked').value;
+
+            if (!file) {
+                alert('Please select a file');
+                return;
+            }
+
+            batchLoadingSpinner.style.display = 'flex';
+            batchResult.style.display = 'none';
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('model', model);
+
+            try {
+                const response = await fetch('/api/batch-predict', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to process batch');
+                }
+
+                const data = await response.json();
+                batchResults = data.results;
+
+                document.getElementById('totalJobs').textContent = data.total_jobs;
+                document.getElementById('legitimateJobs').textContent = data.legitimate_count;
+                document.getElementById('fraudulentJobs').textContent = data.fraudulent_count;
+                document.getElementById('processingTime').textContent = `${data.processing_time.toFixed(1)}s`;
+
+                batchResult.style.display = 'block';
+
+                // Update dashboard stats
+                updateDashboardStats();
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error: Failed to process batch file. Please try again.');
+            } finally {
+                batchLoadingSpinner.style.display = 'none';
+            }
+        });
+
+        // Utility functions
+        function clearForm() {
+            document.getElementById('jobText').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+
+        function clearCompareForm() {
+            document.getElementById('compareText').value = '';
+            document.getElementById('compareResult').style.display = 'none';
+        }
+
+        function updateDashboardStats() {
+            // This would typically fetch from an API, but for demo we'll simulate
+            const totalScans = parseInt(localStorage.getItem('totalScans') || '0') + 1;
+            const fraudDetected = parseInt(localStorage.getItem('fraudDetected') || '0');
+
+            localStorage.setItem('totalScans', totalScans);
+            document.getElementById('totalScans').textContent = totalScans;
+            document.getElementById('fraudDetected').textContent = fraudDetected;
+        }
+
+        function addToHistory(text, result) {
+            const historyList = document.getElementById('historyList');
+            const historyItem = document.createElement('div');
+            historyItem.className = 'history-item';
+
+            const timestamp = new Date().toLocaleString();
+            const preview = text.substring(0, 100) + (text.length > 100 ? '...' : '');
+
+            historyItem.innerHTML = `
+                <small class="text-muted">${timestamp}</small>
+                <p class="mb-1">${preview}</p>
+                <div class="d-flex gap-2">
+                    ${result.comparison ?
+                        `<span class="badge bg-primary">BERT: ${result.bert.prediction}</span>
+                         <span class="badge bg-success">RoBERTa: ${result.roberta.prediction}</span>` :
+                        `<span class="badge bg-${result.prediction === 'LEGITIMATE' ? 'success' : 'danger'}">${result.prediction}</span>`
+                    }
+                </div>
+            `;
+
+            // Remove empty state if present
+            const emptyState = historyList.querySelector('.text-center');
+            if (emptyState) {
+                historyList.removeChild(emptyState);
+            }
+
+            historyList.insertBefore(historyItem, historyList.firstChild);
+        }
+
+        function downloadResults() {
+            if (batchResults.length === 0) {
+                alert('No results to download');
+                return;
+            }
+
+            const csvContent = 'data:text/csv;charset=utf-8,' +
+                'Text,Prediction,Confidence\n' +
+                batchResults.map(row =>
+                    `"${row.text.replace(/"/g, '""')}",${row.prediction},${row.confidence}`
+                ).join('\n');
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement('a');
+            link.setAttribute('href', encodedUri);
+            link.setAttribute('download', 'fraud_detection_results.csv');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function showDetailedResults() {
+            if (batchResults.length === 0) {
+                alert('No results to show');
+                return;
+            }
+
+            // This could open a modal with detailed results
+            alert('Detailed results view would be implemented here');
+        }
+
+        // Initialize dashboard
+        updateDashboardStats();
+    </script>
+</body>
+</html>

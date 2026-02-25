@@ -1,0 +1,71 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Quick Evaluate Models",
+      "type": "shell",
+      "command": "python",
+      "args": ["quick_eval.py"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Run Full Project",
+      "type": "shell",
+      "command": "python",
+      "args": ["run_project.py"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Install Dependencies",
+      "type": "shell",
+      "command": "pip",
+      "args": ["install", "-r", "requirements.txt"],
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "Train BERT Model",
+      "type": "shell",
+      "command": "python",
+      "args": ["src/bert_model.py"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Train RoBERTa Model",
+      "type": "shell",
+      "command": "python",
+      "args": ["src/roberta_model.py"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Run EDA",
+      "type": "shell",
+      "command": "python",
+      "args": ["src/eda.py"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}

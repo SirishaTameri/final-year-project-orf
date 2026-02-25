@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center fade-in-up">
+        <div class="col-lg-10">
+            <div class="glass-card">
+                <h2 class="mb-4"><i class="fas fa-balance-scale me-2 text-success"></i>Compare Models</h2>
+                <p class="text-white-50 mb-4">Analyze the same text with both BERT and RoBERTa to see how they differ.
+                </p>
+
+                <form id="compareForm">
+                    <div class="mb-4">
+                        <textarea class="form-control" id="compareText" rows="6"
+                            placeholder="Paste job description here..." required></textarea>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg rounded-pill" id="compareBtn">
+                            <span class="spinner-border spinner-border-sm d-none me-2" role="status"
+                                aria-hidden="true"></span>
+                            Run Comparison
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="compareResult" class="d-none row g-4">
+                <!-- BERT Result -->
+                <div class="col-md-6 fade-in-up delay-1">
+                    <div class="glass-card h-100 border-primary">
+                        <h4 class="text-primary"><i class="fas fa-robot me-2"></i>BERT</h4>
+                        <hr class="border-light opacity-25">
+                        <div class="text-center py-3">
+                            <h2 id="bertPred" class="fw-bold"></h2>
+                            <p>Confidence: <span id="bertConf"></span></p>
+                            <div class="progress" style="height: 8px;">
+                                <div id="bertBar" class="progress-bar bg-primary" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RoBERTa Result -->
+                <div class="col-md-6 fade-in-up delay-2">
+                    <div class="glass-card h-100 border-info">
+                        <h4 class="text-info"><i class="fas fa-brain me-2"></i>RoBERTa</h4>
+                        <hr class="border-light opacity-25">
+                        <div class="text-center py-3">
+                            <h2 id="robertaPred" class="fw-bold"></h2>
+                            <p>Confidence: <span id="robertaConf"></span></p>
+                            <div class="progress" style="height: 8px;">
+                                <div id="robertaBar" class="progress-bar bg-info" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analysis Summary -->
+                <div class="col-12 fade-in-up delay-3">
+                    <div class="glass-card bg-opacity-10 bg-warning">
+                        <h5><i class="fas fa-lightbulb me-2 text-warning"></i>Consensus Analysis</h5>
+                        <p id="consensusAnalysis" class="mb-0 text-white"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

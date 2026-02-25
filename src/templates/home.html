@@ -1,0 +1,376 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center text-lg-start">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                <span
+                    class="d-inline-block py-1 px-3 rounded-pill bg-dark border border-secondary text-info mb-3 small fw-bold">
+                    <i class="fas fa-bolt me-2"></i>AI-Powered Fraud Detection
+                </span>
+                <h1 class="hero-title fw-bold text-white mb-4">
+                    Secure Your <br>
+                    <span class="text-gradient">Hiring Pipeline</span>
+                </h1>
+                <p class="lead text-white-50 mb-5">
+                    Stop fake candidates and recruitment scams in their tracks with our advanced BERT & RoBERTa
+                    transformer models.
+                    Protect your company's reputation and save valuable time.
+                </p>
+                <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
+                    <a href="{{ url_for('main.predict_page') }}" class="btn btn-primary-glow btn-lg">
+                        <i class="fas fa-search"></i> Analyze Job
+                    </a>
+                    <a href="{{ url_for('main.batch_page') }}" class="btn btn-outline-glow btn-lg">
+                        <i class="fas fa-upload"></i> Batch Scan
+                    </a>
+                </div>
+                <div class="mt-5 text-white-50 small">
+                    <i class="fas fa-check-circle text-success me-2"></i>99% Accuracy
+                    <span class="mx-3">|</span>
+                    <i class="fas fa-check-circle text-success me-2"></i>Instant Results
+                    <span class="mx-3">|</span>
+                    <i class="fas fa-check-circle text-success me-2"></i>Privacy First
+                </div>
+            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-duration="1000">
+                <div class="position-relative">
+                    <div class="absolute-blob"
+                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px; background: var(--primary); filter: blur(150px); opacity: 0.2; z-index: -1;">
+                    </div>
+                    <img src="{{ url_for('static', filename='img/hero_ai_shield.png') }}" class="img-fluid floating-img"
+                        alt="AI Shield Illustration"
+                        style="filter: drop-shadow(0 0 30px rgba(58, 134, 255, 0.3)); border-radius: 20px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trusted By Marquee -->
+<section class="py-4 border-bottom" style="border-color: var(--glass-border) !important; background: rgba(0,0,0,0.3);">
+    <div class="container-fluid">
+        <p class="text-center text-white-50 small mb-3 letter-spacing-1 fw-bold">TRUSTED BY INNOVATIVE TEAMS</p>
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <span class="company-logo">TECHCORP</span>
+                <span class="company-logo">NEXUS HIRING</span>
+                <span class="company-logo">GLOBALSECURE</span>
+                <span class="company-logo">QUANTUM HR</span>
+                <span class="company-logo">CYBER SENTRY</span>
+                <span class="company-logo">ELITE RECRUIT</span>
+                <span class="company-logo">ALPHA TALENT</span>
+                <span class="company-logo">TECHCORP</span>
+                <span class="company-logo">NEXUS HIRING</span>
+                <span class="company-logo">GLOBALSECURE</span>
+                <span class="company-logo">QUANTUM HR</span>
+                <span class="company-logo">CYBER SENTRY</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scientific Basis Section (New for FYP) -->
+<section class="section-padding position-relative"
+    style="background: linear-gradient(180deg, var(--bg-dark) 0%, #0f172a 100%);" id="methodology">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2" data-aos="fade-left">
+                <div class="glass-card border-primary"
+                    style="border-width: 1px; box-shadow: 0 0 50px rgba(58, 134, 255, 0.15);">
+                    <h3 class="text-primary mb-4"><i class="fas fa-microscope me-2"></i>Technical Methodology</h3>
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="fw-bold text-primary me-3 display-4 opacity-25">01</div>
+                        <div>
+                            <h5 class="fw-bold text-white">Data Balancing (Borderline-SMOTE)</h5>
+                            <p class="text-white-50 small">
+                                We utilize <strong>Borderline-SMOTE</strong> to address the severe class imbalance in
+                                recruitment datasets.
+                                By generating synthetic examples near the decision boundary, we improve model
+                                sensitivity to fraudulent patterns
+                                that mimic legitimate job postings.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start">
+                        <div class="fw-bold text-primary me-3 display-4 opacity-25">02</div>
+                        <div>
+                            <h5 class="fw-bold text-white">Transformer Architecture (BERT)</h5>
+                            <p class="text-white-50 small">
+                                The engine leverages <strong>Bidirectional Encoder Representations from
+                                    Transformers</strong>.
+                                Our BERT-based approach understands complex semantic relationships, capturing subtle
+                                linguistic cues
+                                like emotional manipulation and irregular phrasing.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1 pe-lg-5" data-aos="fade-right">
+                <span class="text-secondary fw-bold text-uppercase tracking-wider small">Academic Foundation</span>
+                <h2 class="display-5 fw-bold mt-2 mb-4">Hybrid <span class="text-gradient">BERT + SMOBD</span>
+                    Architecture</h2>
+                <p class="lead text-white-50 mb-4">
+                    Our project implements a state-of-the-art Deep Learning framework designed for high-recall fraud
+                    detection in imbalanced environments.
+                </p>
+                <p class="text-white-50">
+                    Standard recruitment datasets often contain less than 5% fraudulent samples. Our implementation of
+                    Borderline-SMOTE combined with BERT's attention mechanism overcomes this by focusing on the
+                    most sophisticated scams that traditional keyword filters miss.
+                </p>
+                <div class="mt-4">
+                    <a href="{{ url_for('main.resources_page') }}"
+                        class="btn btn-outline-glow btn-sm rounded-pill px-4">
+                        <i class="fas fa-file-pdf me-2"></i> Read Base Paper
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Traditional Security Fails -->
+<section class="section-padding position-relative overflow-hidden">
+    <div class="bg-animated" style="opacity: 0.3;"></div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-right">
+                <div class="glass-card border-danger" style="border-color: rgba(239, 71, 111, 0.3);">
+                    <h3 class="text-danger mb-4"><i class="fas fa-exclamation-triangle me-2"></i>Why WAFs Fail</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-4">
+                            <h5 class="fw-bold">1. Rule-Based Limitation</h5>
+                            <p class="text-white-50 small">Web Application Firewalls look for SQLi or XSS signatures.
+                                They cannot understand the <em>semantic context</em> of a "too good to be true" job
+                                offer.</p>
+                        </li>
+                        <li class="mb-4">
+                            <h5 class="fw-bold">2. The Human Factor</h5>
+                            <p class="text-white-50 small">Fraudsters use social engineering, not hacking. They bypass
+                                firewalls by posting "legitimate-looking" content that tricks humans, not servers.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-7 ps-lg-5" data-aos="fade-left">
+                <h2 class="display-5 fw-bold mb-4">WAF & MFA Are Not Enough</h2>
+                <p class="lead text-white-50 mb-4">
+                    Cybercriminals have evolved. They don't just hack systems; they exploit trust. Traditional security
+                    layers protect your <strong>infrastructure</strong>, but JobGuard AI protects your
+                    <strong>reputation</strong>.
+                </p>
+                <p class="text-white-50">
+                    Our Deep Learning models detect nuanced linguistic patterns—urgency, irregular formatting, and
+                    emotional manipulation—that standard security tools simply cannot see.
+                </p>
+                <div class="row mt-5 g-3">
+                    <div class="col-6">
+                        <div class="p-3 rounded border border-secondary bg-dark">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-times-circle text-danger me-2"></i>
+                                <span class="fw-bold">Standard filters</span>
+                            </div>
+                            <small class="text-white-50">Misses 40% of semantic fraud.</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 rounded border border-primary bg-primary bg-opacity-10">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-check-circle text-primary me-2"></i>
+                                <span class="fw-bold">Our AI Engine</span>
+                            </div>
+                            <small class="text-white-50">Detects 99% of context-based scams.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Grid -->
+<section class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="text-primary fw-bold text-uppercase tracking-wider small">Our Capabilities</span>
+            <h2 class="display-5 fw-bold mt-2">Why Choose JobGuard AI?</h2>
+            <p class="text-white-50 mx-auto" style="max-width: 600px;">
+                We leverage cutting-edge Natural Language Processing to identify subtle patterns in fraudulent job
+                postings that humans often miss.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Feature 1 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+                <div class="glass-card">
+                    <div class="feature-icon-box">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h4>Deep Learning</h4>
+                    <p class="text-white-50">
+                        Powered by Google's BERT and Facebook's RoBERTa models, fine-tuned specifically on recruitment
+                        fraud datasets.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-card">
+                    <div class="feature-icon-box text-success"
+                        style="border-color: rgba(6, 214, 160, 0.2); color: var(--success);">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4>Real-time Analysis</h4>
+                    <p class="text-white-50">
+                        Get instant feedback on job descriptions. Our optimized inference engine processes text in
+                        milliseconds.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-card">
+                    <div class="feature-icon-box text-warning"
+                        style="border-color: rgba(255, 190, 11, 0.2); color: var(--warning);">
+                        <i class="fas fa-file-csv"></i>
+                    </div>
+                    <h4>Batch Processing</h4>
+                    <p class="text-white-50">
+                        Analyze thousands of job postings at once. Upload your dataset and download comprehensive risk
+                        reports.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="section-padding bg-dark position-relative">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                <h2 class="display-5 fw-bold mb-4">Seamless Integration into your Workflow</h2>
+                <div class="d-flex mb-4">
+                    <div class="me-4">
+                        <span
+                            class="d-flex align-items-center justify-content-center bg-primary rounded-circle text-white fw-bold"
+                            style="width: 40px; height: 40px;">1</span>
+                    </div>
+                    <div>
+                        <h5>Paste or Upload</h5>
+                        <p class="text-white-50">Simply paste a job description or upload a CSV file containing multiple
+                            listings.</p>
+                    </div>
+                </div>
+                <div class="d-flex mb-4">
+                    <div class="me-4">
+                        <span
+                            class="d-flex align-items-center justify-content-center bg-secondary rounded-circle text-white fw-bold"
+                            style="width: 40px; height: 40px;">2</span>
+                    </div>
+                    <div>
+                        <h5>AI Analysis</h5>
+                        <p class="text-white-50">Our transformer models analyze semantic patterns, linguistic cues, and
+                            known fraud indicators.</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="me-4">
+                        <span
+                            class="d-flex align-items-center justify-content-center bg-success rounded-circle text-white fw-bold"
+                            style="width: 40px; height: 40px;">3</span>
+                    </div>
+                    <div>
+                        <h5>Actionable Insights</h5>
+                        <p class="text-white-50">Receive a clear "Safe" or "Suspicious" verdict with confidence scores
+                            and risk explanation.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="glass-card p-4 border-0 bg-gradient-dark" style="background: rgba(255,255,255,0.03);">
+                    <!-- Code/Terminal Mockup -->
+                    <div class="d-flex gap-2 mb-3">
+                        <div class="rounded-circle bg-danger" style="width: 10px; height: 10px;"></div>
+                        <div class="rounded-circle bg-warning" style="width: 10px; height: 10px;"></div>
+                        <div class="rounded-circle bg-success" style="width: 10px; height: 10px;"></div>
+                    </div>
+                    <code class="d-block text-success mb-2">> Initiating scan...</code>
+                    <code class="d-block text-light mb-2">> Analyzing semantic structure...</code>
+                    <code class="d-block text-light mb-2">> Detecting anomalies in salary range...</code>
+                    <code class="d-block text-light mb-2">> Checking company reputation entities...</code>
+                    <div class="mt-3 p-3 rounded bg-white bg-opacity-10 border border-success">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-success"><i class="fas fa-check-shield me-2"></i>LEGITIMATE</span>
+                            <span class="badge bg-success">99.8% Confidence</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="glass-card text-center py-5 position-relative overflow-hidden" data-aos="zoom-in">
+            <div class="position-relative z-1">
+                <h2 class="display-6 fw-bold mb-3">Ready to verify your job postings?</h2>
+                <p class="lead text-white-50 mb-4">Start using our free AI detection tool today. No registration
+                    required.</p>
+                <a href="{{ url_for('main.predict_page') }}"
+                    class="btn btn-light text-primary fw-bold btn-lg rounded-pill px-5">
+                    Start Detection Now
+                </a>
+            </div>
+            <!-- Background Glow -->
+            <div
+                style="position: absolute; top: -50%; left: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(58,134,255,0.4) 0%, rgba(0,0,0,0) 70%); filter: blur(50px); pointer-events: none;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Floating Animation for Hero Image */
+    .floating-img {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Initialize AOS
+    document.addEventListener('DOMContentLoaded', function () {
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+        });
+    });
+</script>
+{% endblock %}

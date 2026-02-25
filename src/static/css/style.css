@@ -1,0 +1,406 @@
+:root {
+    /* Brand Colors */
+    --primary: #3A86FF;
+    /* Vibrant Blue */
+    --primary-dark: #265AD2;
+    --secondary: #8338EC;
+    /* Electric Purple */
+    --accent: #FF006E;
+    /* Hot Pink */
+    --success: #06D6A0;
+    /* Teal Green */
+    --warning: #FFBE0B;
+    /* Amber */
+    --danger: #EF476F;
+    /* Rose Red */
+
+    /* Neutral / Backgrounds */
+    --bg-dark: #0A0E17;
+    /* Deep Midnight */
+    --bg-card: rgba(22, 28, 45, 0.6);
+    --text-main: #FFFFFF;
+    --text-muted: #A0AEC0;
+
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --blur-strength: 12px;
+
+    /* Spacing */
+    --navbar-height: 80px;
+}
+
+/* === Global Resets & Typography === */
+/* === Global Resets & Typography === */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    padding-top: 100px;
+    /* Clear fixed navbar */
+    padding-bottom: 3rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* === Animated Background === */
+.bg-animated {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    background: radial-gradient(circle at 15% 50%, rgba(58, 134, 255, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(131, 56, 236, 0.15), transparent 25%);
+    filter: blur(40px);
+    pointer-events: none;
+}
+
+/* === Navbar === */
+.navbar-custom {
+    background: rgba(10, 14, 23, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-link {
+    color: var(--text-muted) !important;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0 10px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: white !important;
+    transform: translateY(-1px);
+}
+
+.btn-nav-cta {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white !important;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(58, 134, 255, 0.3);
+}
+
+.btn-nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(58, 134, 255, 0.5);
+}
+
+/* === Hero Section === */
+.hero-section {
+    padding: 180px 0 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-title {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.hero-gradient-text {
+    background: linear-gradient(to right, var(--primary), var(--success));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+}
+
+/* === Buttons === */
+.btn-primary-glow {
+    background-color: var(--primary);
+    color: white;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 0 20px rgba(58, 134, 255, 0.4);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary-glow:hover {
+    background-color: var(--primary-dark);
+    box-shadow: 0 0 30px rgba(58, 134, 255, 0.6);
+    transform: translateY(-2px);
+    color: white;
+}
+
+.btn-outline-glow {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-glow:hover {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+
+/* === Glass Cards === */
+.glass-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    /* height: 100%; Removed to allow content to dictate height, prevents forced gaps */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* === Features Section === */
+.section-padding {
+    padding: 100px 0;
+}
+
+.feature-icon-box {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+    border: 1px solid var(--glass-border);
+}
+
+/* === Mega Menu === */
+.navbar-custom .dropdown-menu {
+    background: rgba(10, 14, 23, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown-item {
+    color: var(--text-muted);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--primary);
+    transform: translateX(5px);
+}
+
+.dropdown-header {
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+/* === Infinite Marquee === */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.marquee-content {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+}
+
+.marquee-content:hover {
+    animation-play-state: paused;
+}
+
+.company-logo {
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 3rem;
+    font-family: 'Outfit', sans-serif;
+    transition: color 0.3s;
+}
+
+.company-logo:hover {
+    color: white;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* === Footer === */
+.footer {
+    background: #05080f;
+    padding: 80px 0 30px;
+    border-top: 1px solid var(--glass-border);
+    margin-top: 100px;
+}
+
+.footer h5 {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.footer-link {
+    display: block;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: var(--primary);
+}
+
+/* === Utilities & Animations === */
+.text-gradient {
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
+
+/* === Form Elements === */
+.input-glass {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+}
+
+.input-glass:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(58, 134, 255, 0.1);
+    color: white;
+    outline: none;
+}
+
+/* === Profile Specific === */
+.profile-avatar-container {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--primary);
+    box-shadow: 0 0 25px rgba(58, 134, 255, 0.3);
+    position: relative;
+    background: var(--bg-card);
+}
+
+.profile-avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nav-avatar-sm {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--primary);
+}

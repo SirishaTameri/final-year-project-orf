@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - JobGuard AI</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="bg-animated"></div>
+
+    <!-- Normalize & Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">
+                <i class="fas fa-shield-alt me-2 text-primary"></i>JobGuard<span class="fw-light">AI</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {{ 'active' if request.path == '/' else '' }}"
+                            href="{{ url_for('main.index') }}">Home</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="solutionsDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Solutions
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="solutionsDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('main.solutions_page') }}#architecture">
+                                    <i class="fas fa-layer-group me-2"></i>Deep Learning Architecture
+                                </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.solutions_page') }}#smote">
+                                    <i class="fas fa-balance-scale me-2"></i>Data Balancing (SMOTE)
+                                </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.batch_page') }}">
+                                    <i class="fas fa-file-csv me-2"></i>Batch Processing
+                                </a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Resources
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('main.resources_page') }}#faqs">
+                                    <i class="fas fa-question-circle me-2"></i>FAQs
+                                </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.resources_page') }}#dataset">
+                                    <i class="fas fa-database me-2"></i>EMSCAD Dataset
+                                </a></li>
+                            <li>
+                                <hr class="dropdown-divider bg-white bg-opacity-10">
+                            </li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.compare_page') }}">
+                                    <i class="fas fa-vial me-2"></i>Model Comparison tool
+                                </a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ 'active' if 'company' in request.path else '' }}"
+                            href="{{ url_for('main.company_page') }}">Company</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ 'active' if 'profile' in request.path else '' }}"
+                            href="{{ url_for('main.profile_page') }}">Dashboard</a>
+                    </li>
+                </ul>
+                <div class="d-flex gap-3 align-items-center" id="auth-section">
+                    <div id="logged-out-section">
+                        <a href="{{ url_for('main.login_page') }}" class="fw-bold text-white me-2"
+                            style="font-size: 0.9rem;">Log In</a>
+                        <a href="{{ url_for('main.signup_page') }}" class="btn btn-nav-cta">Get Started</a>
+                    </div>
+                    <div id="logged-in-section" class="d-none">
+                        <div class="dropdown">
+                            <a href="#"
+                                class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                                id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://ui-avatars.com/api/?name=User&background=random" id="nav-user-photo"
+                                    alt="" class="nav-avatar-sm me-2">
+                                <span id="nav-user-name" class="small fw-bold">User</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="{{ url_for('main.profile_page') }}"><i
+                                            class="fas fa-user-circle me-2"></i>My Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#" onclick="logoutUser()"><i
+                                            class="fas fa-sign-out-alt me-2"></i>Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="min-height: 80vh; padding-top: 100px;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <h5 class="fw-bold mb-4">JobGuard AI</h5>
+                    <p class="text-white-50">Protecting the recruitment ecosystem with state-of-the-art transformer
+                        models. Detect fraud before it happens.</p>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Platform</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li><a href="{{ url_for('main.predict_page') }}"
+                                class="text-decoration-none text-white-50">Single Check</a></li>
+                        <li><a href="{{ url_for('main.batch_page') }}" class="text-decoration-none text-white-50">Batch
+                                Scan</a></li>
+                        <li><a href="{{ url_for('main.compare_page') }}"
+                                class="text-decoration-none text-white-50">Model Compare</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Resource Hub</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li><a href="{{ url_for('main.fraud_awareness_page') }}"
+                                class="text-decoration-none text-white-50">Fraud Awareness</a></li>
+                        <li><a href="{{ url_for('main.articles_page') }}"
+                                class="text-decoration-none text-white-50">Knowledge Base</a></li>
+                        <li><a href="{{ url_for('main.compliance_page') }}"
+                                class="text-decoration-none text-white-50">Legal & Compliance</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Stay Updated</h5>
+                    <p class="text-white-50 small">Get the latest updates on recruitment fraud trends.</p>
+                    <form id="subscribeForm" class="input-group mb-3">
+                        <input type="email" id="subscribeEmail" class="form-control input-glass"
+                            placeholder="Enter your email" style="border-radius: 10px 0 0 10px;" required>
+                        <button class="btn btn-primary" type="submit" id="subscribeBtn"
+                            style="border-radius: 0 10px 10px 0;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="small text-white-50">&copy; 2024 JobGuard AI Project. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Floating Widget -->
+    <div id="chatbotContainer" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+        <button id="chatbotToggle" class="btn btn-primary shadow-lg rounded-circle" style="width: 60px; height: 60px;">
+            <i class="fas fa-comment-dots fa-lg"></i>
+        </button>
+
+        <div id="chatbotWindow" class="glass-card d-none"
+            style="position: absolute; bottom: 80px; right: 0; width: 300px; height: 400px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(58, 134, 255, 0.3);">
+            <div
+                class="p-3 border-bottom border-secondary d-flex justify-content-between align-items-center bg-primary bg-opacity-10">
+                <h6 class="mb-0 fw-bold"><i class="fas fa-robot me-2"></i>JobGuard Assistant</h6>
+                <button id="closeChatbot" class="btn-close btn-close-white btn-sm"></button>
+            </div>
+            <div id="chatBody" class="flex-grow-1 p-3 overflow-auto small" style="height: 0;">
+                <div class="mb-2 p-2 bg-dark border border-secondary text-white-50 rounded" style="max-width: 80%;">
+                    Hello! I'm JobGuard AI. How can I help you today?
+                </div>
+            </div>
+            <form id="chatForm" class="p-2 border-top border-secondary">
+                <div class="input-group">
+                    <input type="text" id="chatInput" class="form-control input-glass fs-small"
+                        placeholder="Ask me anything...">
+                    <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ once: true });</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <script>
+        // Use localStorage for frontend-only auth persistence
+        function updateAuthState() {
+            const user = JSON.parse(localStorage.getItem('jobguard_user'));
+            const loggedInView = document.getElementById('logged-in-section');
+            const loggedOutView = document.getElementById('logged-out-section');
+
+            if (user && loggedInView && loggedOutView) {
+                loggedInView.classList.remove('d-none');
+                loggedOutView.classList.add('d-none');
+                document.getElementById('nav-user-name').textContent = user.name || 'User';
+                if (user.photo) {
+                    document.getElementById('nav-user-photo').src = user.photo;
+                } else if (user.name) {
+                    document.getElementById('nav-user-photo').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=3A86FF&color=fff`;
+                }
+            } else if (loggedInView && loggedOutView) {
+                loggedInView.classList.add('d-none');
+                loggedOutView.classList.remove('d-none');
+            }
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('jobguard_user');
+            window.location.href = "{{ url_for('main.logout') }}";
+        }
+
+        document.addEventListener('DOMContentLoaded', updateAuthState);
+
+        // Handle Subscription
+        const subscribeForm = document.getElementById('subscribeForm');
+        if (subscribeForm) {
+            subscribeForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('subscribeEmail').value;
+                const btn = document.getElementById('subscribeBtn');
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+                try {
+                    const response = await fetch('/api/subscribe', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email })
+                    });
+                    const data = await response.json();
+                    if (data.status === 'success') {
+                        alert(data.message);
+                        document.getElementById('subscribeEmail').value = '';
+                    } else {
+                        alert('Error: ' + data.error);
+                    }
+                } catch (err) {
+                    alert('Failed to subscribe. Please try again.');
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = 'Subscribe';
+                }
+            });
+        }
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="glass-card fade-in-up">
+        <h2 class="mb-4"><i class="fas fa-file-csv me-2 text-warning"></i>Batch File Analysis</h2>
+
+        <div class="alert alert-light bg-opacity-10 border-0 text-white-50">
+            <i class="fas fa-info-circle me-2"></i> Upload a CSV file containing a column named <strong>text</strong> or
+            <strong>description</strong>. Max 100 rows.
+        </div>
+
+        <form id="batchForm" class="mb-4">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-6">
+                    <label for="batchFile" class="form-label text-white-50">Choose CSV File</label>
+                    <input class="form-control" type="file" id="batchFile" accept=".csv" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label text-white-50">Model</label>
+                    <select class="form-control" id="batchModel">
+                        <option value="bert">BERT</option>
+                        <option value="roberta">RoBERTa</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-vibrant w-100" id="batchBtn">
+                        <span class="spinner-border spinner-border-sm d-none me-2" role="status"></span>
+                        Process File
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Stats Overview (Hidden) -->
+        <div id="batchStats" class="row g-3 d-none mb-4">
+            <div class="col-md-3">
+                <div class="p-3 rounded bg-white bg-opacity-10 text-center">
+                    <h3 id="totalCount" class="mb-0">0</h3>
+                    <small class="text-white-50">Total</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 rounded bg-success bg-opacity-25 text-center">
+                    <h3 id="legitCount" class="text-success mb-0">0</h3>
+                    <small class="text-white-50">Legitimate</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 rounded bg-danger bg-opacity-25 text-center">
+                    <h3 id="fraudCount" class="text-danger mb-0">0</h3>
+                    <small class="text-white-50">Fraudulent</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 rounded bg-info bg-opacity-25 text-center">
+                    <h3 id="batchTime" class="text-info mb-0">0s</h3>
+                    <small class="text-white-50">Time</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Results Table -->
+        <div id="batchTableContainer" class="table-responsive d-none">
+            <table class="table table-dark table-hover align-middle" style="background: transparent;">
+                <thead>
+                    <tr>
+                        <th width="50%">Job Snippet</th>
+                        <th>Prediction</th>
+                        <th>Confidence</th>
+                    </tr>
+                </thead>
+                <tbody id="batchTableBody">
+                    <!-- Rows will be injected here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

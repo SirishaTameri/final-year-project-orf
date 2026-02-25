@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center fade-in-up">
+        <div class="col-lg-8">
+            <div class="glass-card">
+                <h2 class="mb-4"><i class="fas fa-search me-2 text-primary"></i>Analyze Job Posting</h2>
+
+                <form id="predictionForm">
+                    <div class="mb-4">
+                        <label for="jobText" class="form-label text-white-50">Paste Job Description</label>
+                        <textarea class="form-control" id="jobText" rows="8"
+                            placeholder="Enter the full text of the job posting here..." required></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label text-white-50">Select Model</label>
+                        <div class="d-flex gap-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="model" id="bertModel" value="bert"
+                                    checked>
+                                <label class="form-check-label" for="bertModel">
+                                    BERT <small class="text-white-50">(Fast & Balanced)</small>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="model" id="robertaModel"
+                                    value="roberta">
+                                <label class="form-check-label" for="robertaModel">
+                                    RoBERTa <small class="text-white-50">(High Precision)</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-vibrant btn-lg" id="predictBtn">
+                            <span class="spinner-border spinner-border-sm d-none me-2" role="status"
+                                aria-hidden="true"></span>
+                            Analyze Posting
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Result Section (Hidden by default) -->
+            <div id="resultSection" class="glass-card d-none fade-in-up">
+                <div class="text-center mb-4">
+                    <h3 id="predictionResult" class="display-6 fw-bold mb-2"></h3>
+                    <div class="progress" style="height: 10px; background-color: rgba(255,255,255,0.1);">
+                        <div id="confidenceBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                            role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <p class="mt-2 text-white-50">Confidence: <span id="confidenceValue"
+                            class="fw-bold text-white"></span></p>
+                </div>
+
+                <div class="alert custom-alert mb-4" id="recommendationAlert" role="alert">
+                    <i class="fas fa-info-circle me-2"></i> <span id="recommendationText"></span>
+                </div>
+
+                <!-- Risk Breakdown Feature -->
+                <div id="riskBreakdown" class="mt-4 pt-4 border-top border-secondary border-opacity-25 d-none">
+                    <h5 class="fw-bold mb-3"><i class="fas fa-chart-pie me-2 text-warning"></i>Risk Factor Analysis</h5>
+                    <div class="row g-3" id="riskGrid">
+                        <!-- Dynamic items -->
+                    </div>
+                </div>
+
+                <div class="mt-3 text-end text-white-50 small">
+                    Processing time: <span id="procTime"></span>s | Model: <span id="modelUsed"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

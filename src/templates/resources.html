@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero-section text-center pt-5 pb-5">
+    <div class="container pt-5">
+        <h1 class="display-3 fw-bold mb-4">Project Resources</h1>
+        <p class="lead text-white-50 mx-auto" style="max-width: 700px;">
+            Documentation, datasets, and references used in this Final Year Project.
+        </p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Paper Card -->
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="glass-card h-100">
+                    <div class="feature-icon-box text-primary" style="margin-bottom: 1rem;">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h4>Base Paper</h4>
+                    <p class="text-white-50 mt-3">
+                        "SEE: Online Recruitment Fraud (ORF) Detection Using Deep Learning Approaches"
+                    </p>
+                    <hr class="border-secondary my-4">
+                    <p class="small text-white-50">
+                        This project implements the methodologies proposed in the base paper, focusing on deep transfer
+                        learning techniques.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Dataset Card -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100" id="dataset">
+                <div class="glass-card h-100">
+                    <div class="feature-icon-box text-warning"
+                        style="margin-bottom: 1rem; color: var(--warning); border-color: rgba(255, 190, 11, 0.2);">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h4>EMSCAD Dataset</h4>
+                    <p class="text-white-50 mt-3">
+                        Employment Scam Aegean Dataset (EMSCAD). Contains 17,880 job descriptions manually annotated.
+                    </p>
+                    <div class="d-grid gap-2 mt-3">
+                        <a href="{{ url_for('static', filename='docs/test_jobs.csv') }}"
+                            class="btn btn-sm btn-outline-glow">
+                            <i class="fas fa-download me-2"></i>Download Sample CSV
+                        </a>
+                        <a href="https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction"
+                            target="_blank" class="btn btn-sm btn-link text-white-50 text-decoration-none">
+                            <i class="fas fa-external-link-alt me-2"></i>More Data on Kaggle
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Stack Card -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-card h-100">
+                    <div class="feature-icon-box text-success"
+                        style="margin-bottom: 1rem; color: var(--success); border-color: rgba(6, 214, 160, 0.2);">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h4>Technology Stack</h4>
+                    <p class="text-white-50 mt-3">
+                        Built with modern frameworks for performance and scalability.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <span class="badge bg-dark border border-secondary">Python</span>
+                        <span class="badge bg-dark border border-secondary">Flask</span>
+                        <span class="badge bg-dark border border-secondary">PyTorch</span>
+                        <span class="badge bg-dark border border-secondary">Transformers</span>
+                        <span class="badge bg-dark border border-secondary">Bootstrap 5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQs Section -->
+<section class="section-padding bg-dark" id="faqs">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Frequently Asked Questions</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item bg-transparent border-0 mb-3">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed glass-card py-3 text-white" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
+                                aria-controls="collapseOne">
+                                <span class="fw-bold">How accurate is the detection?</span>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                            data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-white-50">
+                                Our models achieve approximately 97-98% accuracy on the test dataset. By using SMOTE
+                                balancing and pre-trained Transformers (BERT/RoBERTa), we significantly reduce false
+                                positives.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-transparent border-0 mb-3">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed glass-card py-3 text-white" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                aria-controls="collapseTwo">
+                                <span class="fw-bold">Can I upload bulk job descriptions?</span>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-white-50">
+                                Yes! Our "Batch Processing" solution allows you to upload CSV files containing thousands
+                                of job descriptions for rapid analysis.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-transparent border-0 mb-3">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed glass-card py-3 text-white" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                                aria-controls="collapseThree">
+                                <span class="fw-bold">Is my data secure?</span>
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-white-50">
+                                Absolutely. We do not store your uploaded job descriptions after processing. The
+                                inference runs in memory and the result is returned immediately.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Insights -->
+<section class="section-padding">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <h2 class="fw-bold mb-0">Featured Insights</h2>
+            <a href="{{ url_for('main.articles_page') }}" class="text-primary text-decoration-none">View All <i
+                    class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="glass-card p-0 overflow-hidden h-100">
+                    <div class="p-4">
+                        <small class="text-primary fw-bold text-uppercase">Case Study</small>
+                        <h4 class="mt-2 mb-3">The Rise of "Easy Apply" Scams</h4>
+                        <p class="text-white-50 small">How fraudsters exploit one-click application features on major
+                            platforms to harvest personal data.</p>
+                        <a href="{{ url_for('main.articles_page') }}" class="btn btn-sm btn-outline-glow mt-3">Read
+                            More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="glass-card p-0 overflow-hidden h-100">
+                    <div class="p-4">
+                        <small class="text-warning fw-bold text-uppercase">Tech Deep Dive</small>
+                        <h4 class="mt-2 mb-3">Why BERT Beats Keywords</h4>
+                        <p class="text-white-50 small">An analysis of semantic context: why "Work from home" isn't
+                            always a red flag, but the context around it is.</p>
+                        <a href="{{ url_for('main.articles_page') }}" class="btn btn-sm btn-outline-glow mt-3">Read
+                            More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="glass-card p-0 overflow-hidden h-100">
+                    <div class="p-4">
+                        <small class="text-success fw-bold text-uppercase">Report</small>
+                        <h4 class="mt-2 mb-3">2025 Fraud Landscape</h4>
+                        <p class="text-white-50 small">Annual report on the shifting tactics of online recruitment fraud
+                            syndicates.</p>
+                        <a href="{{ url_for('static', filename='docs/SEE_Online_Recruitment_Fraud_ORF_Detection_Using_Deep_Learning_Approaches.pdf') }}"
+                            class="btn btn-sm btn-outline-glow mt-3">Download PDF</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
